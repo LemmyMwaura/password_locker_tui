@@ -1,2 +1,3 @@
-while password != passcode or username != name:
-            #     pass
+else:
+                #     print('Option is not available\n')
+                #     repeat = True
