@@ -10,11 +10,23 @@ while choice != '1' or choice != '2' or choice != '3':
                     )
 
     if choice == '1': 
+        def confirm_account_creation():
+            global repeat
+
+            if okay == 'OK':
+                user = User(user_name, password)
+                User.save_user(user)
+                print('Account created, proceed to Login\n')
+                # print(User.user_list)
+            else:
+                print('Did not confirm\n')
+                repeat = True
+
         def create_account():
             global user_name
             global password
-            global confirm_password
             global repeat
+            global okay
 
             user_name = input('Enter your username\n ')
             password = input('Enter your password\n ')
@@ -25,12 +37,13 @@ while choice != '1' or choice != '2' or choice != '3':
                 repeat = True
             else:
                 okay = input('Type OK to Confirm\n ')
+                repeat = False
+                confirm_account_creation()
 
-        if repeat == True:
-            create_account()
-            
         create_account()
-            
+        while repeat == True:
+            create_account()
+                  
     if choice == '2':
         print('welcome')
     if choice == '3':
