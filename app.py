@@ -1,5 +1,6 @@
 from user import User 
 from credentials import Credential
+from rich.table import Table
 import random
 import string
 
@@ -34,7 +35,6 @@ def run_main_app():
                     user = User(user_name, password)
                     User.save_user(user)
                     print('Account created, proceed to Login\n')
-                    print(User.user_list)
                 else:
                     print('Did not confirm, Type "OK" in uppercase\n')
                     repeat = True
@@ -49,6 +49,7 @@ def run_main_app():
 
                 #TODO check if user exists
                 check_if_user_exists()
+                print('Generate or Create Password')
                 pass_choice = input(' a. Generate password\n'
                                     ' b. Create Password\n ')
 
@@ -82,9 +83,19 @@ def run_main_app():
                     print('Passwords don\'t match try again') 
                 else:
                     new_credential = Credential(social, social_username, social_password)
-                    print(current_user)
                     current_user.credential_list.append(new_credential)
                     print(current_user.credential_list)
+                    print(f'Your {social} password has been saved')
+
+            def append_to_table():
+                    table = Table(title = f"{current_user}'s Credentials")
+                    table.add_column('Social-Account', style='cyan')
+                    table.add_column('Social-Username', style='magenta')
+                    table.add_column('Password', justify='right', style='green')
+
+                    for idx , credential in enumerate(current_user.credential_list):
+                        table.add_row(current_user.credential_list, )
+                        print(current_user.credential_list)
 
             def access_personal_details():
                 global social
@@ -98,13 +109,13 @@ def run_main_app():
                             )
                 if pick == 'a':
                     social = input('Enter the Social Account Name,eg Instagram \n')
-                    social_username = input(f' Enter your {social} username \n ')
-                    social_password = input(f' Enter your {social} password \n ')
-                    social_confirm_password = input(f' Confirm your {social} password \n ')
+                    social_username = input(f'Enter your {social} username \n ')
+                    social_password = input(f'Enter your {social} password \n ')
+                    social_confirm_password = input(f'Confirm your {social} password \n ')
 
                     add_credential()
                 if pick == 'b':
-                    print('new')
+                    append_to_table()
                 
             def confirm_user_exists():
                 global current_user
@@ -112,19 +123,17 @@ def run_main_app():
                 username = input('Enter your username\n ')
                 password = input('Enter your password\n ')
 
-                # if 
                 for idx, user in enumerate(User.user_list): 
-                     
-                    if username == user.user_name and password == user.password:
-                        print(f'user is {user.user_name}, and the index is {idx}')
-
-                        print(f'Welcome {username}\n')
+                    if username in user.user_name:
+                        print(f'Jambo {username}\n')
                         current_user = User.user_list[idx]
-                        print(current_user.user_name)
-                        # access_personal_details()      
+
+                        if password != user.password:
+                            print(f'Your password was wrong {user.user_name}, try again')
+                        else:   
+                            access_personal_details()  
                     else:
-                        # print(f'Wrong Username {user.user_name} or Password {user.password}')
-                        pass
+                        print('Username not available, Create account or try again.')
 
             confirm_user_exists()
 
