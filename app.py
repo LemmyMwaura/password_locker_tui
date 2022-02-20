@@ -2,6 +2,7 @@ from user import User
 from credentials import Credential
 from rich.table import Table
 from rich.console import Console
+from tkinter import *
 import random
 import string
 
@@ -90,17 +91,28 @@ def run_main_app():
                     print(f'Your {social} password has been saved')
 
             def append_to_table():
-                    table = Table(title = f"{current_user.user_name}'s Credentials")
-                    table.add_column('Social-Account', style='bold cyan')
-                    table.add_column('Social-Username', style='bold magenta')
-                    table.add_column('Password', justify='right', style='bold green')
+                global table
 
-                    for credential in current_user.credential_list:
-                        table.add_row(credential.social_account_name,
-                                    credential.social_username,
-                                    credential.social_password,
-                                )
+                table = Table(title = f"{current_user.user_name}'s Credentials")
+                table.add_column('Social-Account', style='bold cyan')
+                table.add_column('Social-Username', style='bold magenta')
+                table.add_column('Password', justify='right', style='bold green')
+
+                for credential in current_user.credential_list:
+                    table.add_row(credential.social_account_name,
+                                credential.social_username,
+                                credential.social_password,
+                            )
+                rich_colors.print(table)
+
+            def delete_password():
+                global table
+                
+                try:
                     rich_colors.print(table)
+                    delete_item = input('Enter Social-Account name you wish to delete\n')
+                except:
+                    print('No items to delete')
 
             def access_personal_details():
                 global social
@@ -110,7 +122,8 @@ def run_main_app():
 
                 pick = input('Would you like to save a new password or view existing passwords\n'
                                 'a. Save a new password\n'
-                                'b. View my current password(s)\n '
+                                'b. View my current password(s)\n'
+                                'c. Delete password(s)\n '
                             )
                 if pick == 'a':
                     social = input('Enter the Social Account Name,eg Instagram \n')
@@ -121,20 +134,23 @@ def run_main_app():
                     add_credential()
                 if pick == 'b':
                     append_to_table()
+
+                if pick == 'c':
+                    delete_password()
                 
             def confirm_user_exists():
                 global current_user
 
-                username = input('Enter your username\n ')
+                username = input('Enter your username\n')
                 password = input('Enter your password\n ')
 
                 for idx, user in enumerate(User.user_list): 
-                    if username in user.user_name:
+                    if len(username) >= 1 and username in user.user_name:
                         print(f'Jambo {username}\n')
                         current_user = User.user_list[idx]
 
                         if password != user.password:
-                            print(f'Your password was wrong {user.user_name}, try again')
+                            print(f'Your password was wrong {username}, try again')
                         else:   
                             access_personal_details()  
                     else:
