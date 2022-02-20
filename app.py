@@ -1,9 +1,11 @@
 from user import User 
 from credentials import Credential
 from rich.table import Table
+from rich.console import Console
 import random
 import string
 
+rich_colors = Console()
 def run_main_app():
     greetings=['Hey', 'Hi', 'Wassup', 'Jambo']
     choice = ''
@@ -88,14 +90,17 @@ def run_main_app():
                     print(f'Your {social} password has been saved')
 
             def append_to_table():
-                    table = Table(title = f"{current_user}'s Credentials")
-                    table.add_column('Social-Account', style='cyan')
-                    table.add_column('Social-Username', style='magenta')
-                    table.add_column('Password', justify='right', style='green')
+                    table = Table(title = f"{current_user.user_name}'s Credentials")
+                    table.add_column('Social-Account', style='bold cyan')
+                    table.add_column('Social-Username', style='bold magenta')
+                    table.add_column('Password', justify='right', style='bold green')
 
-                    for idx , credential in enumerate(current_user.credential_list):
-                        table.add_row(current_user.credential_list, )
-                        print(current_user.credential_list)
+                    for credential in current_user.credential_list:
+                        table.add_row(credential.social_account_name,
+                                    credential.social_username,
+                                    credential.social_password,
+                                )
+                    rich_colors.print(table)
 
             def access_personal_details():
                 global social
