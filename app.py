@@ -17,23 +17,25 @@ def main():
             """
                 Account creation
             """
-            def random_password(length=4):
+            def get_random_password(length=4): 
                 char_set = string.ascii_letters
                 return  str(random.randint(1000,9999)) + ''.join(random.choice(char_set)for _ in range(length))
 
             def confirm_account_creation():
                 global repeat
+                
+                okay = input('Type OK to Confirm\n ')
 
                 if okay == 'OK':
                     user = User(user_name, password)
                     User.save_user(user)
                     print('Account created, proceed to Login\n')
-                    # print(User.user_list)
+                    print(User.user_list)
                 else:
-                    print('Did not confirm\n')
+                    print('Did not confirm, Type "OK" in uppercase\n')
                     repeat = True
 
-            def create_account():
+            def create_user_account():
                 global user_name
                 global password
                 global repeat
@@ -42,14 +44,13 @@ def main():
                 user_name = input('Enter your username\n ')
                 pass_choice = input(' a. Generate password\n'
                                     ' b. Create Password\n ')
-
-                if pass_choice == 'a':
-                    password = random_password()
-                    repeat = False
-                    print(f'Your password is {password}')
-                    okay = input('Type OK to Confirm\n ')
-                    confirm_account_creation()
                 
+                if pass_choice == 'a':
+                    password = get_random_password()
+                    print(f'Your password is {password}') 
+                    repeat = False
+                    confirm_account_creation()
+                    
                 if pass_choice == 'b':
                     password = input('Enter your password\n ')
                     confirm_password = input('Confirm your password\n ')
@@ -58,17 +59,12 @@ def main():
                         print('Passwords did not match, Try again\n ')
                         repeat = True
                     else:
-                        okay = input('Type OK to Confirm\n ')
                         repeat = False
                         confirm_account_creation()
-                
-                else:
-                    print('Option is not available\n')
-                    repeat = True
 
-            create_account()
+            create_user_account()
             while repeat == True:
-                create_account()
+                create_user_account()
                     
         if choice == '2':
             """
@@ -78,10 +74,13 @@ def main():
                 username = input('Enter your username')
                 password = input('Enter your password')
 
+                for user in User.user_list:
+                    print(user.user_name)
                 # while password != passcode or username != name:
                 #     pass
+
+            confirm_user_exists()
             
-            print('welcome')
         if choice == '3':
             exit()
 
