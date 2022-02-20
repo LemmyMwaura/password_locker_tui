@@ -77,7 +77,7 @@ def run_main_app():
             """
                 Login section of the code
             """
-            def add_social_account():
+            def add_credential():
                 if social_password != social_confirm_password:
                     print('Passwords don\'t match try again') 
                 else:
@@ -93,16 +93,16 @@ def run_main_app():
                 global social_confirm_password
 
                 pick = input('Would you like to save a new password or view existing passwords\n'
-                                'a. Save a new password\n '
+                                'a. Save a new password\n'
                                 'b. View my current password(s)\n '
                             )
                 if pick == 'a':
-                    social = input('Enter the Social Account Name,eg Instagram \n ')
+                    social = input('Enter the Social Account Name,eg Instagram \n')
                     social_username = input(f' Enter your {social} username \n ')
                     social_password = input(f' Enter your {social} password \n ')
                     social_confirm_password = input(f' Confirm your {social} password \n ')
 
-                    add_social_account()
+                    add_credential()
                 if pick == 'b':
                     print('new')
                 
@@ -112,13 +112,19 @@ def run_main_app():
                 username = input('Enter your username\n ')
                 password = input('Enter your password\n ')
 
-                for user in User.user_list:
+                # if 
+                for idx, user in enumerate(User.user_list): 
+                     
                     if username == user.user_name and password == user.password:
+                        print(f'user is {user.user_name}, and the index is {idx}')
+
                         print(f'Welcome {username}\n')
-                        # current_user = 
-                        access_personal_details()      
+                        current_user = User.user_list[idx]
+                        print(current_user.user_name)
+                        # access_personal_details()      
                     else:
-                        print(f'Wrong Username{user.user_name} or Password{user.password}')
+                        # print(f'Wrong Username {user.user_name} or Password {user.password}')
+                        pass
 
             confirm_user_exists()
 
