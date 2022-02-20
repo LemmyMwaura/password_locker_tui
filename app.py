@@ -10,6 +10,10 @@ while choice != '1' or choice != '2' or choice != '3':
                     )
 
     if choice == '1': 
+        """
+            Account creation
+        """
+
         def confirm_account_creation():
             global repeat
 
@@ -29,22 +33,42 @@ while choice != '1' or choice != '2' or choice != '3':
             global okay
 
             user_name = input('Enter your username\n ')
-            password = input('Enter your password\n ')
-            confirm_password = input('Confirm your password\n ')
+            pass_choice = input(' a. Generate password\n '
+                                ' b. Create Password\n ')
 
-            if password != confirm_password:
-                print('Passwords did not match, Try again\n')
-                repeat = True
-            else:
-                okay = input('Type OK to Confirm\n ')
+            if pass_choice == 'a':
+                password = 1235
                 repeat = False
+                okay = input('Type OK to Confirm\n ')
                 confirm_account_creation()
+            
+            if pass_choice == 'b':
+                password = input('Enter your password\n ')
+                confirm_password = input('Confirm your password\n ')
+
+                if password != confirm_password:
+                    print('Passwords did not match, Try again\n ')
+                    repeat = True
+                else:
+                    okay = input('Type OK to Confirm\n ')
+                    repeat = False
+                    confirm_account_creation()
 
         create_account()
         while repeat == True:
             create_account()
                   
     if choice == '2':
+        """
+            Login section of the code
+        """
+        def confirm_user_exists():
+            username = input('Enter your username')
+            password = input('Enter your password')
+
+            # while password != passcode or username != name:
+            #     pass
+        
         print('welcome')
     if choice == '3':
         exit()
