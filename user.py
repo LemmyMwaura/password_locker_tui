@@ -6,6 +6,7 @@ class User:
         self.user_name = user_name
         self.password = password
         self.id = User.number_of_users + 1
+        self.credentials = []
         User.add_user()
 
     def save_user(self):

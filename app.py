@@ -1,8 +1,9 @@
 from user import User 
+from credentials import Credential
 import random
 import string
 
-def main():
+def run_main_app():
     greetings=['Hey', 'Hi', 'Wassup', 'Jambo']
     choice = ''
     while choice != '1' or choice != '2' or choice != '3':
@@ -42,6 +43,8 @@ def main():
                 global okay
 
                 user_name = input('Enter your username\n ')
+
+                #TODO check if user exists
                 pass_choice = input(' a. Generate password\n'
                                     ' b. Create Password\n ')
                 
@@ -70,22 +73,34 @@ def main():
             """
                 Login section of the code
             """
+            def access_personal_details():
+                pick = input('Would you like to save a new password or view existing passwords\n'
+                                'a. Save a new password\n '
+                                'b. View my current password(s)\n '
+                            )
+                if pick == 'a':
+                    print('save')
+                if pick == 'b':
+                    print('new')
+                
             def confirm_user_exists():
-                username = input('Enter your username')
-                password = input('Enter your password')
+                username = input('Enter your username\n ')
+                password = input('Enter your password\n ')
 
                 for user in User.user_list:
-                    print(user.user_name)
-                # while password != passcode or username != name:
-                #     pass
+                    if username == user.user_name and password == user.password:
+                        print(f'Welcome {username}\n')
+                        access_personal_details()      
+                    else:
+                        print(f'Wrong Username{user.user_name} or Password{user.password}')
 
             confirm_user_exists()
-            
+
         if choice == '3':
             exit()
 
 if __name__ == "__main__":
-    main()
+    run_main_app()
 
 #  social = input('Enter the Socials Name,eg Instagram \n')
 #         input(f' Enter your {social} username \n ')
