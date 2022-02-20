@@ -1,6 +1,5 @@
 class User:
     number_of_users = 0
-    user_id = 0
     user_list = []
 
     def __init__(self, user_name, password):

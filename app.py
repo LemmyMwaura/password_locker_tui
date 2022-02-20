@@ -1,4 +1,5 @@
 from user import User 
+# from math import random
 
 choice = ''
 while choice != '1' or choice != '2' or choice != '3':
@@ -6,7 +7,7 @@ while choice != '1' or choice != '2' or choice != '3':
                     '\n1. Create an account'
                     '\n2. Login to existing account'
                     '\n3. Exit'
-                    '\n'
+                    '\n '
                     )
 
     if choice == '1': 
@@ -33,12 +34,13 @@ while choice != '1' or choice != '2' or choice != '3':
             global okay
 
             user_name = input('Enter your username\n ')
-            pass_choice = input(' a. Generate password\n '
+            pass_choice = input(' a. Generate password\n'
                                 ' b. Create Password\n ')
 
             if pass_choice == 'a':
                 password = 1235
                 repeat = False
+                print(f'Your password is {password}')
                 okay = input('Type OK to Confirm\n ')
                 confirm_account_creation()
             
@@ -53,6 +55,10 @@ while choice != '1' or choice != '2' or choice != '3':
                     okay = input('Type OK to Confirm\n ')
                     repeat = False
                     confirm_account_creation()
+            
+            else:
+                print('Option is not available\n')
+                repeat = True
 
         create_account()
         while repeat == True:
@@ -72,7 +78,8 @@ while choice != '1' or choice != '2' or choice != '3':
         print('welcome')
     if choice == '3':
         exit()
-
+    else:
+        print('Choice is not available\n')
 
 #  social = input('Enter the Socials Name,eg Instagram \n')
 #         input(f' Enter your {social} username \n ')
