@@ -87,12 +87,9 @@ def run_main_app():
                 else:
                     new_credential = Credential(social, social_username, social_password)
                     current_user.credential_list.append(new_credential)
-                    print(current_user.credential_list)
                     print(f'Your {social} password has been saved')
 
             def append_to_table():
-                global table
-
                 table = Table(title = f"{current_user.user_name}'s Credentials")
                 table.add_column('Social-Account', style='bold cyan')
                 table.add_column('Social-Username', style='bold magenta')
@@ -106,43 +103,55 @@ def run_main_app():
                 rich_colors.print(table)
 
             def delete_password():
-                global table
-                
-                try:
-                    rich_colors.print(table)
-                    delete_item = input('Enter Social-Account name you wish to delete\n')
-                except:
-                    print('No items to delete')
+                append_to_table()
+                delete_item = input('Enter Social-Account name you wish to delete\n')
+
+                for credential in current_user.credential_list:
+                    if delete_item in credential.social_account_name:
+                        remove = input(f'Are you sure you want to delete {delete_item}\n'
+                                'Type "Yes" if sure\n'
+                            )
+                        if remove == 'Yes':
+                            current_user.credential_list.remove(credential)   
+                            print(f'{delete_item} was successfully removed')
+                        else:   
+                            print(f'Did not type Yes, {delete_item} credential was not removed')
 
             def access_personal_details():
                 global social
                 global social_username
                 global social_password
                 global social_confirm_password
+                run = True
 
-                pick = input('Would you like to save a new password or view existing passwords\n'
-                                'a. Save a new password\n'
-                                'b. View my current password(s)\n'
-                                'c. Delete password(s)\n '
-                            )
-                if pick == 'a':
-                    social = input('Enter the Social Account Name,eg Instagram \n')
-                    social_username = input(f'Enter your {social} username \n ')
-                    social_password = input(f'Enter your {social} password \n ')
-                    social_confirm_password = input(f'Confirm your {social} password \n ')
+                while run:
+                    pick = input('Would you like to save a new password or view existing passwords\n'
+                                    'a. Save a new password\n'
+                                    'b. View my current password(s)\n'
+                                    'c. Delete password(s)\n'
+                                    'd. LogOut\n '
+                                )
+                    if pick == 'a':
+                        social = input('Enter the Social Account Name,eg Instagram \n')
+                        social_username = input(f'Enter your {social} username \n ')
+                        social_password = input(f'Enter your {social} password \n ')
+                        social_confirm_password = input(f'Confirm your {social} password \n ')
+                        add_credential()
 
-                    add_credential()
-                if pick == 'b':
-                    append_to_table()
+                    if pick == 'b':
+                        append_to_table()
 
-                if pick == 'c':
-                    delete_password()
-                
+                    if pick == 'c':
+                        delete_password()
+
+                    if pick == 'd':
+                        run = False
+
             def confirm_user_exists():
                 global current_user
 
                 username = input('Enter your username\n')
-                password = input('Enter your password\n ')
+                password = input('Enter your password\n')
 
                 for idx, user in enumerate(User.user_list): 
                     if len(username) >= 1 and username in user.user_name:
