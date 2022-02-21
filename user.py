@@ -14,15 +14,11 @@ class User:
     
     def delete_user(self):
         User.user_list.remove(self)
-        User.remove_user
 
     @classmethod
     def add_user(cls):
         cls.number_of_users += 1
 
-    @classmethod
-    def remove_user(cls):
-        cls.number_of_users -= 1
     
     @classmethod
     def total_number_of_users(cls):

@@ -14,8 +14,9 @@ class TestPasswordManager(unittest.TestCase):
         '''
         The teardown method does the cleanup after each test has run.
         '''
+        for user in User.user_list:
+            user.delete_user
         User.user_list = []
-        User.total_number_of_users = 0
 
     def test_init(self):
         '''
@@ -80,6 +81,6 @@ class TestPasswordManager(unittest.TestCase):
         self.another_new_user = User('Cindy','87654321')
         self.another_new_user_again = User('Brandon','abcdefgh')
         self.assertEqual(User.number_of_users, 3)
-        
+
 if __name__ == '__main__':
     unittest.main()
