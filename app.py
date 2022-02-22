@@ -34,7 +34,7 @@ def run_main_app():
             '''
             exit()
         else:
-            print('[bold red]Choice not available, Pick between [bold green]1[/bold green] and [bold green]3.')
+            print('[bold red]Choice not available, Pick between [bold green]1, 2[/bold green] and [bold green]3.')
 
 if __name__ == "__main__":
     run_main_app()
