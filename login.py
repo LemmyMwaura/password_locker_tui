@@ -13,7 +13,7 @@ def login():
         char_set = string.ascii_letters
         return  str(random.randint(1000,9999)) + ''.join(random.choice(char_set)for _ in range(length))
 
-    def add_credential():
+    def add_credential(social, social_username, social_password):
         new_credential = Credential(social, social_username, social_password)
         current_user.credential_list.append(new_credential)
         print(f'[bold green]Your [bold blue]{social}[/bold blue] password has been saved')
@@ -33,13 +33,13 @@ def login():
 
     def delete_password():
         append_to_table()
-        delete_item = input('Enter Social-Account name you wish to delete\n')
+        delete_item = input('Enter Social-Account name you wish to delete\n').strip()
 
         for credential in current_user.credential_list:
             if delete_item == credential.social_account_name:
                 remove = input(f'Are you sure you want to delete {delete_item}\n'
                         'Type "Yes" if sure\n'
-                    )
+                    ).strip()
                 if remove == 'Yes':
                     current_user.credential_list.remove(credential)   
                     print(f'[bold blue]{delete_item} [bold green]was successfully removed')
@@ -50,10 +50,6 @@ def login():
             print('[bold red]Account does not exit, try again')
 
     def access_personal_details():
-        global social
-        global social_username
-        global social_password
-        global social_confirm_password
         logged_in = True
 
         while logged_in:
@@ -63,32 +59,32 @@ def login():
                             '2. View my current password(s)\n'
                             '3. Delete password(s)\n'
                             '4. LogOut\n'
-                        )
+                        ).strip()
             if pick == '1':
-                social = input('Enter the Social Account Name,eg Instagram \n')
-                social_username = input(f'Enter your {social} username \n')
+                social = input('Enter the Social Account Name,eg Instagram \n').strip()
+                social_username = input(f'Enter your {social} username \n').strip()
                 print('[bold blue]Generate or Create your social Password')
                 pass_choice = input(' a. Generate password\n'
                                     ' b. Create Password\n'
-                                    )
+                                    ).strip()
 
                 if  pass_choice == 'a':
                     social_password = get_random_password()
                     print(f'[bold green]Your password is [bold blue]{social_password}')
-                    confirm = input('Type OK to confirm\n')
+                    confirm = input('Type OK to confirm\n').strip()
                     if confirm == 'OK':
-                        add_credential()
+                        add_credential(social, social_username, social_password)
                     else:
                         print(f'[bold red]Did not confirm, [bold blue]{social}[/bold blue] Account not created')
 
                 elif pass_choice == 'b':
-                    social_password = input('Enter your password\n')
-                    social_confirm_password = input('Confirm your password\n')
+                    social_password = input('Enter your password\n').strip()
+                    social_confirm_password = input('Confirm your password\n').strip()
 
                     if social_password != social_confirm_password:
                         print('[bold red]Passwords don\'t match try again') 
                     else:
-                        add_credential()
+                        add_credential(social, social_username, social_password)
 
             elif pick == '2':
                 append_to_table()
@@ -105,11 +101,11 @@ def login():
     def confirm_user_exists():
         global current_user
 
-        username = input('Enter your username\n')
-        password = input('Enter your password\n')
+        username = input('Enter your username\n').strip()
+        password = input('Enter your password\n').strip()
 
         for idx, user in enumerate(User.user_list): 
-            if len(username) >= 1 and username == user.user_name:
+            if username == user.user_name:
                 print(f'[bold blue]Jambo {username}\n')
                 current_user = User.user_list[idx]
 

@@ -14,7 +14,7 @@ def run_main_app():
                         '\n2. Login to existing account'
                         '\n3. Exit'
                         '\n'
-                        )
+                        ).strip()
 
         if choice == '1': 
             """

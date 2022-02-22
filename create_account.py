@@ -11,7 +11,7 @@ def create_account():
     def confirm_account_creation():
         global wrong_password
         
-        okay = input('Type OK to Confirm\n')
+        okay = input('Type OK to Confirm\n').strip()
 
         if okay == 'OK':
             user = User(user_name, password)
@@ -35,12 +35,12 @@ def create_account():
         global wrong_password
         global okay
 
-        user_name = input('Enter your username\n')
+        user_name = input('Enter your username\n').strip()
         if confirm_username_exists(user_name) == True:
             print('[bold blue]Generate or Create Password')
             pass_choice = input(' a. Generate password\n'
                                 ' b. Create Password\n'
-                                )
+                                ).strip()
 
             if pass_choice == 'a':
                 password = get_random_password()
@@ -49,8 +49,8 @@ def create_account():
                 confirm_account_creation()
                 
             elif pass_choice == 'b':
-                password = input('Enter your password\n')
-                confirm_password = input('Confirm your password\n')
+                password = input('Enter your password\n').strip()
+                confirm_password = input('Confirm your password\n').strip()
 
                 if password != confirm_password:
                     print('[bold red]Passwords did not match, Try again\n')
@@ -64,6 +64,6 @@ def create_account():
                 wrong_password = True
 
     create_user_account()
-    
+
     while wrong_password == True:
         create_user_account()
