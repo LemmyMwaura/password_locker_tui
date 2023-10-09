@@ -2,6 +2,8 @@
 
 Password Locker. A Python script that allows you to manage your passwords from one source.
 
+NB: This was a school project i did a long time ago. 
+
 ## Table of contents
   <!-- - [Screenshot](#screenshot) -->
 - [Password Locker](#password-locker)
