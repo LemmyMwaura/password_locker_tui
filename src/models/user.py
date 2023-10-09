@@ -11,7 +11,7 @@ class User:
 
     def save_user(self):
         User.user_list.append(self)
-    
+
     def delete_user(self):
         User.user_list.remove(self)
 
@@ -19,7 +19,6 @@ class User:
     def add_user(cls):
         cls.number_of_users += 1
 
-    
     @classmethod
     def total_number_of_users(cls):
         return cls.number_of_users

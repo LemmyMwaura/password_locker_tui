@@ -1,6 +1,6 @@
 import unittest
-from user import User
-from credentials import Credential
+from models.user import User
+from models.credentials import Credential
 
 class TestPasswordManager(unittest.TestCase):
     def setUp(self):

@@ -1,5 +1,5 @@
-from user import User 
-from credentials import Credential
+from models.user import User 
+from models.credentials import Credential
 from rich.console import Console
 from rich.table import Table
 from rich import print
