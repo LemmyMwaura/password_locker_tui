@@ -1,5 +1,5 @@
-from create_account import create_account
-from login import login
+from src.create_account import create_account
+from src.login import login
 from rich.console import Console
 from rich import print
 
