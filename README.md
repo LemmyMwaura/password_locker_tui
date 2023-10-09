@@ -8,7 +8,6 @@ Password Locker. A Python script that allows you to manage your passwords from o
   - [Table of contents](#table-of-contents)
     - [Project Description](#project-description)
     - [Built with / Technologies Used](#built-with--technologies-used)
-    - [Contact Information](#contact-information)
     - [License and Copywright Information](#license-and-copywright-information)
   - [Author](#author)
 
@@ -30,16 +29,6 @@ Password manager.\
 
 - Python
   - Rich Library
-
----
-
-### Contact Information
-
-| Name   | Email               |
-|--------|---------------------|
-| Email  | <lemmymwaura@gmail.com> |
-| Twitter| lemmyMwaura |
-| Github | [lemmyMwaura](https://github.com/LemmyMwaura)|
 
 ---
 
