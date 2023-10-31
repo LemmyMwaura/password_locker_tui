@@ -2,7 +2,7 @@
 
 Password Locker. A Python script that allows you to manage your passwords from one source.
 
-NB: This was a school project I did some time ago. 
+NB: This was a school project I did some time ago.
 
 ## Table of contents
   <!-- - [Screenshot](#screenshot) -->
@@ -10,7 +10,7 @@ NB: This was a school project I did some time ago.
   - [Table of contents](#table-of-contents)
     - [Project Description](#project-description)
     - [Built with / Technologies Used](#built-with--technologies-used)
-    - [License and Copyright Information](#license-and-copywright-information)
+    - [License and Copyright Information](#license-and-copyright-information)
 
 ---
 
